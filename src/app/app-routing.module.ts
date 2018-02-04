@@ -6,12 +6,15 @@ const routes: Array<Route> = [{
   path: 'about',
   loadChildren: './about/about.module#AboutModule'
 }, {
+  path: 'products',
+  loadChildren: './products/products.module#ProductsModule'
+}, {
   path: 'home',
   component: HomeComponent
 }, {
   path: '',
   pathMatch: 'full',
-  redirectTo: 'about'
+  redirectTo: 'home'
 }];
 
 @NgModule({

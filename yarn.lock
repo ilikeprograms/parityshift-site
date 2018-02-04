@@ -203,6 +203,23 @@
   version "5.0.0-beta.5"
   resolved "https://registry.yarnpkg.com/@nguniversal/module-map-ngfactory-loader/-/module-map-ngfactory-loader-5.0.0-beta.5.tgz#d86497e704f702e1a18bbcab5dd6586057941fa5"
 
+"@ngx-share/button@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ngx-share/button/-/button-5.0.0.tgz#b8b89ea47e60f79d43270b191835b286918660da"
+  dependencies:
+    "@ngx-share/core" "5.0.0"
+
+"@ngx-share/buttons@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ngx-share/buttons/-/buttons-5.0.0.tgz#1cc859110ef398d5d324627f4936050f1ef1fbed"
+  dependencies:
+    "@ngx-share/button" "5.0.0"
+    "@ngx-share/core" "5.0.0"
+
+"@ngx-share/core@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ngx-share/core/-/core-5.0.0.tgz#7a4ba18943b62e7dc9d7191706efccbe02b9b375"
+
 "@schematics/angular@~0.1.17":
   version "0.1.17"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-0.1.17.tgz#084a7cbe2de6f94a856bd08d95c9d35ef8905e2b"

@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderModule } from './header/header.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule.withServerTransition({appId: 'parityshift-site'}),
     ClarityModule,
+    ShareButtonsModule.forRoot(),
     AppRoutingModule,
     HeaderModule,
   ],

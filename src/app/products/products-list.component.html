@@ -1,0 +1,50 @@
+<h1>Products</h1>
+
+<div class="card">
+  <div class="card-header">
+    <img src="/assets/porthole-icon16.png" alt="Porthole product icon" />&nbsp;Porthole
+  </div>
+  <div class="card-block">
+    <div class="card-title">
+      Porthole is a Chrome extension for Digital marketers which makes it easier to manage and change keywords, suitable for use within AdWords.
+    </div>
+    <div class="alert alert-info alert-sm">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="info-circle"></clr-icon>
+          </div>
+          <div class="alert-text">
+            30 day free trial is offered, so you can try it out!
+          </div>
+        </div>
+      </div>
+      <button type="button" class="close" aria-label="Close">
+        <clr-icon aria-hidden="true" shape="close"></clr-icon>
+      </button>
+    </div>
+    <div class="card-text">
+      Main Features
+      <ul class="list">
+        <li>Uses Chrome storage, so you can sign in to your Google account and cary on where you left off. Seamlessly.</li>
+        <li>Provides a section where you can add keywords as part of Ad groups</li>
+        <li>Keywords can easily be changed between different types of modifiers e.g Exact match, Broad match modifier etc</li>
+        <li>Keywords be copied/pasted within each AdGroup</li>
+        <li>Clients can be added to group campaigns</li>
+        <li>Campaigns can hold multiple Ad groups</li>
+        <li>Option to export to CSV</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-block">
+    <share-buttons theme="modern-dark" show="11"></share-buttons>
+  </div>
+  <div class="card-block" *ngIf="showFullPortholeInfo">
+    More info
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-sm" (click)="showFullPortholeInfo = !showFullPortholeInfo">{{ showFullPortholeInfo ? 'Less' : 'More'}} info</button>
+    <a class="btn btn-sm btn-link btn-icon-link" href="https://chrome.google.com/webstore/detail/porthole/pdahngoighagemojnmeefclahlanlfhe" target="_blank" rel="noreferrer noopener"><clr-icon aria-hidden="true" shape="store"></clr-icon> View on Chrome store</a>
+    <a class="btn btn-sm btn-link btn-icon-link" href="https://github.com/ilikeprograms/porthole" target="_blank" rel="noreferrer noopener"><clr-icon aria-hidden="true" shape="code"></clr-icon> Github</a>
+  </div>
+</div>
