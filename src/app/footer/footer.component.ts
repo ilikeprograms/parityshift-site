@@ -5,6 +5,11 @@ const startingYear: number = 2018;
 @Component({
   templateUrl: './footer.component.html',
   selector: 'app-footer',
+  styles: [`
+    :host {
+      padding: 0 1rem;
+    }
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
