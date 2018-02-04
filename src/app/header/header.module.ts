@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
+
 import { HeaderComponent } from './header.component';
-import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   declarations: [
@@ -9,8 +9,6 @@ import { MenubarModule } from 'primeng/menubar';
   exports: [
     HeaderComponent
   ],
-  imports: [
-    MenubarModule
-  ]
+  imports: []
 })
 export class HeaderModule {}

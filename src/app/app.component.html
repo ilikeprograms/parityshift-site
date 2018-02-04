@@ -1,3 +1,29 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+<div class="main-container">
+  <!--<div class="alert alert-app-level">-->
+    <!--...-->
+  <!--</div>-->
+  <header class="header header-6">
+    <div class="branding">
+      <a routerLink="/home" class="nav-link">
+        <span class="title">Parity shift</span>
+      </a>
+    </div>
+    <div class="header-nav">
+      <a routerLink="/home" routerLinkActive="active" class="nav-link"><span class="nav-text">Home</span></a>
+      <a routerLink="/about" routerLinkActive="active" class="nav-link"><span class="nav-text">About</span></a>
+    </div>
+  </header>
+  <!--<nav class="subnav">-->
+    <!--...-->
+  <!--</nav>-->
+  <div class="content-container">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+    <!--<nav class="sidenav">-->
+      <!--...-->
+    <!--</nav>-->
+  </div>
+
+  <app-footer></app-footer>
+</div>
