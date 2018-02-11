@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 const startingYear: number = 2018;
 
 @Component({
-  templateUrl: './footer.component.html',
-  selector: 'app-footer',
+  templateUrl: './copyright.component.html',
+  selector: 'app-copyright',
   styles: [`
     :host {
       padding: 0 1rem;
@@ -12,7 +12,7 @@ const startingYear: number = 2018;
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FooterComponent {
+export class CopyrightComponent {
   public get copywriteYear(): string {
     const currentYear: number = new Date().getFullYear();
 

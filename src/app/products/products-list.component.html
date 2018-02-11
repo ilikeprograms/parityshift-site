@@ -19,9 +19,6 @@
           </div>
         </div>
       </div>
-      <button type="button" class="close" aria-label="Close">
-        <clr-icon aria-hidden="true" shape="close"></clr-icon>
-      </button>
     </div>
     <div class="card-text">
       Main Features
@@ -39,12 +36,8 @@
   <div class="card-block">
     <share-buttons theme="modern-dark" show="11"></share-buttons>
   </div>
-  <div class="card-block" *ngIf="showFullPortholeInfo">
-    More info
-  </div>
   <div class="card-footer">
-    <button class="btn btn-sm" (click)="showFullPortholeInfo = !showFullPortholeInfo">{{ showFullPortholeInfo ? 'Less' : 'More'}} info</button>
-    <a class="btn btn-sm btn-link btn-icon-link" href="https://chrome.google.com/webstore/detail/porthole/pdahngoighagemojnmeefclahlanlfhe" target="_blank" rel="noreferrer noopener"><clr-icon aria-hidden="true" shape="store"></clr-icon> View on Chrome store</a>
-    <a class="btn btn-sm btn-link btn-icon-link" href="https://github.com/ilikeprograms/porthole" target="_blank" rel="noreferrer noopener"><clr-icon aria-hidden="true" shape="code"></clr-icon> Github</a>
+    <a class="btn btn-sm btn-link btn-icon-link" href="https://chrome.google.com/webstore/detail/porthole/pdahngoighagemojnmeefclahlanlfhe" target="_blank" rel="noopener noreferrer"><clr-icon aria-hidden="true" shape="store"></clr-icon> View on Chrome store</a>
+    <a class="btn btn-sm btn-link btn-icon-link" href="https://github.com/ilikeprograms/porthole" target="_blank" rel="noopener noreferrer"><clr-icon aria-hidden="true" shape="code"></clr-icon> Github</a>
   </div>
 </div>

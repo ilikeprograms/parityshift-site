@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+import { MetaTitleService } from '../meta/meta-title.service';
+import { MetaTitles } from '../meta/meta-titles.enum';
+import { MetaDescriptions } from '../meta/meta-descriptions.enum';
 
 @Component({
   templateUrl: './home.component.html',
@@ -21,10 +24,16 @@ import { Title } from '@angular/platform-browser';
     .card-block {
       flex: 1 0 auto;
     }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
-  constructor(private title: Title) {
-    this.title.setTitle('Home');
+  constructor(private title: Title, private meta: Meta) {
+    this.title.setTitle(MetaTitleService.formatForMetaTitle(MetaTitles.home));
+
+    this.meta.addTags([{
+      name: 'description',
+      content: MetaDescriptions.home
+    }])
   }
 }

@@ -26,5 +26,21 @@
     <!--</nav>-->
   </div>
 
-  <app-footer></app-footer>
+  <div class="subnav-container">
+    <nav class="subnav">
+      <ul class="nav">
+        <li class="nav-item">
+          <a routerLink="/home" routerLinkActive="active" class="nav-link"><span class="nav-text">Home</span></a>
+          <a routerLink="/about" routerLinkActive="active" class="nav-link"><span class="nav-text">About</span></a>
+          <a routerLink="/products" routerLinkActive="active" class="nav-link"><span class="nav-text">Products</span></a>
+        </li>
+      </ul>
+    </nav>
+
+    <span aria-hidden>&nbsp;</span>
+
+    <app-copyright></app-copyright>
+  </div>
+
+  <app-social-links></app-social-links>
 </div>
