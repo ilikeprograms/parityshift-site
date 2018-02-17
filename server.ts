@@ -3,6 +3,10 @@ import 'reflect-metadata';
 import { renderModuleFactory } from '@angular/platform-server';
 import { enableProdMode } from '@angular/core';
 
+let crypto = require('crypto');
+let session = require('express-session');
+let helmet = require('helmet');
+let csrf = require('csurf');
 let nodemailer = require('nodemailer');
 
 import * as express from 'express';
@@ -16,8 +20,40 @@ enableProdMode();
 // Express server
 const app = express();
 
+let expiryDate = new Date(Date.now() + 60 * 60 * 1000);
+let sessionSecret = crypto.randomBytes(32).toString('base64');
+
+let sess = {
+  name: 'parityShiftSession',
+  secret: sessionSecret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    domain: 'localhost',
+    path: '/',
+    expires: expiryDate,
+    sameSite: true
+  }
+};
+
+if (app.get('env') === 'production') {
+  sess.cookie.secure = true; // serve secure cookies
+  sess.cookie.domain = 'parityshift.com';
+}
+
+app.use(session(sess));
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(csrf());
+
+app.use(function(req, res, next) {
+  res.cookie('XSRF-TOKEN', req.csrfToken());
+
+  return next();
+});
 
 const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist');
