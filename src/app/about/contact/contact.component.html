@@ -1,0 +1,125 @@
+<div class="card">
+  <div class="card-header">
+    Contact
+  </div>
+  <div class="card-block">
+    <div *ngIf="isSubmitting">
+      <span class="spinner spinner-inline">
+        Submitting...
+      </span>
+      <span>
+          Submitting...
+      </span>
+    </div>
+
+    <div class="alert alert-success" *ngIf="isSubmitted">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+          </div>
+          <span class="alert-text">Submitted. We will get back to you shortly.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="!isSubmittedSuccesfully">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+          </div>
+          <span class="alert-text">An error has occured, please try again</span>
+        </div>
+      </div>
+    </div>
+
+    <form class="form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" [hidden]="isSubmitting">
+      <section class="form-block">
+        <div class="form-group">
+          <label for="name" class="required">Name</label>
+          <label for="name"
+                 aria-haspopup="true"
+                 role="tooltip"
+                 class="tooltip tooltip-validation tooltip-sm"
+                 [class.invalid]="contactForm.get('name').invalid
+                        && (contactForm.get('name').dirty || contactForm.get('name').touched)">
+            <input id="name" type="text"
+                   formControlName="name">
+            <span class="tooltip-content">
+                Name is required.
+            </span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="required">Email</label>
+          <label for="email"
+                 aria-haspopup="true"
+                 role="tooltip"
+                 class="tooltip tooltip-validation tooltip-sm"
+                 [class.invalid]="contactForm.get('email').invalid
+                        && (contactForm.get('email').dirty || contactForm.get('email').touched)">
+            <input id="email" type="email"
+                   formControlName="email">
+            <span class="tooltip-content">
+                Email is required.
+            </span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="subject" class="required">Subject</label>
+          <label for="subject"
+                 aria-haspopup="true"
+                 role="tooltip"
+                 class="tooltip tooltip-validation tooltip-sm"
+                 [class.invalid]="contactForm.get('subject').invalid
+                        && (contactForm.get('subject').dirty || contactForm.get('subject').touched)">
+            <input id="subject" type="text"
+                   formControlName="subject">
+            <span class="tooltip-content">
+                Subject is required.
+            </span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="required">Message</label>
+          <label for="message"
+                 aria-haspopup="true"
+                 role="tooltip"
+                 class="tooltip tooltip-validation tooltip-sm"
+                 [class.invalid]="contactForm.get('message').invalid
+                        && (contactForm.get('message').dirty || contactForm.get('message').touched)">
+            <input id="message" type="text"
+                   formControlName="message">
+            <span class="tooltip-content">
+                Message is required.
+            </span>
+          </label>
+        </div>
+
+        <re-captcha #captchaRef (captchaResponse)="handleCorrectCaptcha($event)" site_key="6LcxtUUUAAAAAFMP4FlNYyvHnW9CnHqe9EFrlCoK" formControlName="recaptcha"></re-captcha>
+      </section>
+
+      <input
+        type="submit"
+        tabindex="-1"
+        aria-hidden="true"
+        class="hidden-xs-up"
+        [disabled]="contactForm.invalid"
+      />
+    </form>
+  </div>
+  <div class="card-footer">
+    <button
+      class="btn btn-primary"
+      type="button"
+      [disabled]="contactForm.invalid"
+      (click)="onSubmit()"
+    >
+      Add
+    </button>
+  </div>
+</div>

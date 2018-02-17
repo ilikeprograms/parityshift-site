@@ -3,7 +3,10 @@ import 'reflect-metadata';
 import { renderModuleFactory } from '@angular/platform-server';
 import { enableProdMode } from '@angular/core';
 
+let nodemailer = require('nodemailer');
+
 import * as express from 'express';
+import * as bodyParser from 'body-parser';
 import { join } from 'path';
 import { readFileSync } from 'fs';
 
@@ -12,6 +15,9 @@ enableProdMode();
 
 // Express server
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist');
@@ -26,6 +32,7 @@ const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/server/mai
 import { ngExpressEngine } from '@nguniversal/express-engine';
 // Import module map for lazy loading
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
+import { mailSettings } from './mail-settings';
 
 // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
 app.engine('html', ngExpressEngine({
@@ -38,9 +45,27 @@ app.engine('html', ngExpressEngine({
 app.set('view engine', 'html');
 app.set('views', join(DIST_FOLDER, 'browser'));
 
-/* - Example Express Rest API endpoints -
-  app.get('/api/**', (req, res) => { });
-*/
+app.post('/api/contact', (req, res) => {
+  let transporter = nodemailer.createTransport(mailSettings.smtpConfig);
+
+  const message = {
+    from: `"${req.body.name}" <${req.body.email}>`,
+    to: mailSettings.to,
+    subject: `${mailSettings.subjectPrefix} ${req.body.subject}`,
+    text: req.body.message,
+    replyTo: req.body.email
+  };
+
+  transporter.sendMail(message, function (error, info) {
+    if (error) {
+      res.status(500).end();
+      return;
+    } else {
+      res.status(200).end();
+      return;
+    }
+  });
+});
 
 // Server static files from /browser
 app.get('*.*', express.static(join(DIST_FOLDER, 'browser'), {
