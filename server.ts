@@ -3,6 +3,11 @@ import 'reflect-metadata';
 import { renderModuleFactory } from '@angular/platform-server';
 import { enableProdMode } from '@angular/core';
 
+require('dotenv').config();
+
+const spdy = require('spdy');
+const compression = require('compression');
+const fs = require('fs');
 let crypto = require('crypto');
 let session = require('express-session');
 let helmet = require('helmet');
@@ -43,6 +48,7 @@ if (app.get('env') === 'production') {
   sess.cookie.domain = 'parityshift.com';
 }
 
+app.use(compression());
 app.use(session(sess));
 app.use(helmet());
 app.use(bodyParser.json());
@@ -56,6 +62,7 @@ app.use(function(req, res, next) {
 });
 
 const PORT = process.env.PORT || 4000;
+const SECUREPORT = process.env.SECUREPORT || 443;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 
 // Our index.html we'll use as our template
@@ -80,6 +87,14 @@ app.engine('html', ngExpressEngine({
 
 app.set('view engine', 'html');
 app.set('views', join(DIST_FOLDER, 'browser'));
+
+app.get('/health-check', (req, res) => res.sendStatus(200));
+
+app.use((req, res, next) =>
+  // check if it is a secure (https) request
+  // if not redirect to the equivalent https url
+  app.get('env') === 'production' && !req.secure ? res.redirect('https://' + req.hostname + req.url) : next()
+);
 
 app.post('/api/contact', (req, res) => {
   let transporter = nodemailer.createTransport(mailSettings.smtpConfig);
@@ -110,10 +125,19 @@ app.get('*.*', express.static(join(DIST_FOLDER, 'browser'), {
 
 // ALl regular routes use the Universal engine
 app.get('*', (req, res) => {
-  res.render('index', { req });
+    res.render('index', { req });
 });
 
 // Start up the Node server
 app.listen(PORT, () => {
   console.log(`Node Express server listening on http://localhost:${PORT}`);
 });
+
+if (app.get('env') === 'production') {
+  const options = {
+    cert: fs.readFileSync('./sslcert/fullchain.pem'),
+    key: fs.readFileSync('./sslcert/privkey.pem')
+  };
+
+  spdy.createServer(options, app).listen(SECUREPORT);
+}

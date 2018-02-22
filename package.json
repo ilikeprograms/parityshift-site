@@ -42,11 +42,13 @@
     "body-parser": "^1.18.2",
     "core-js": "^2.5.3",
     "csurf": "^1.9.0",
+    "dotenv": "^5.0.0",
     "express-session": "^1.15.6",
     "font-awesome": "^4.7.0",
     "helmet": "^3.11.0",
     "nodemailer": "^4.4.2",
     "rxjs": "^5.5.6",
+    "spdy": "^3.4.7",
     "zone.js": "^0.8.20"
   },
   "devDependencies": {
