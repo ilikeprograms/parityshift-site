@@ -2,6 +2,31 @@
   background-color: #333333;
 }
 
+@media screen and (max-width: 768px) {
+  .main-container.open-hamburger-menu .header .branding .title {
+    color: #fafafa;
+  }
+
+  .main-container .header-nav.clr-nav-level-1 {
+    background: #333333;
+  }
+
+  .main-container.open-hamburger-menu .header .header-nav.clr-nav-level-1 .nav-link.active {
+    background: #ffffff26;
+    color: #fafafa;
+  }
+
+  .main-container.open-hamburger-menu .header .header-nav.clr-nav-level-1 .nav-link .nav-text {
+    color: #fafafa;
+    opacity: .65;
+  }
+
+  .main-container.open-hamburger-menu .header .header-nav.clr-nav-level-1 .nav-link.active .nav-text {
+    opacity: 1;
+  }
+}
+
+
 .main-container {
   min-height: 100vh;
   height: auto;
