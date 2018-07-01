@@ -1,5 +1,5 @@
+import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { ModuleWithProviders } from '@angular/core';
 
 import { AboutComponent } from './about.component';
 
@@ -8,4 +8,12 @@ const routes: Array<Route> = [{
   component: AboutComponent
 }];
 
-export const routing: ModuleWithProviders = RouterModule.forChild(routes);
+@NgModule({
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class AboutRoutingModule { }
