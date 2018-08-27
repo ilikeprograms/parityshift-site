@@ -7,8 +7,8 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      - /etc/letsencrypt/csr:/home/node/app/ssl/csr
-      - /etc/letsencrypt/keys:/home/node/app/ssl/keys
+      - /etc/letsencrypt/live/parityshift.com/fullchain.pem:/home/node/app/ssl/fullchain
+      - /etc/letsencrypt/live/parityshift.com/privkey.pem:/home/node/app/ssl/private
       - ./:/home/node/app
     ports:
        - "443:443"
