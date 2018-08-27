@@ -7,8 +7,8 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      - /etc/letsencrypt/csr:/home/node/app/ssl/
-      - /etc/letsencrypt/keys:/home/node/app/ssl/
+      - /etc/letsencrypt/csr:/home/node/app/ssl/csr
+      - /etc/letsencrypt/keys:/home/node/app/ssl/keys
       - ./:/home/node/app
     ports:
        - "443:443"
