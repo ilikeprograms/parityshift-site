@@ -140,4 +140,6 @@ if (app.get('env') === 'production') {
   };
 
   spdy.createServer(options, app).listen(SECUREPORT);
+
+  console.log(`HTTP 2 running on on http://localhost:${SECUREPORT}`);
 }

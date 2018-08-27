@@ -5,9 +5,11 @@ services:
     user: "node"
     working_dir: /home/node/app
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     volumes:
+      - /etc/letsencrypt/csr:/home/node/app/ssl/
+      - /etc/letsencrypt/keys:/home/node/app/ssl/
       - ./:/home/node/app
     ports:
-       - "4000:4000"
+       - "443:443"
     command: "npm run serve:ssr"
