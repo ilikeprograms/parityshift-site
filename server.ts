@@ -99,11 +99,11 @@ app.set('views', join(DIST_FOLDER, 'browser'));
 
 app.get('/health-check', (req, res) => res.sendStatus(200));
 
-// app.use((req, res, next) =>
-//   // check if it is a secure (https) request
-//   // if not redirect to the equivalent https url
-//   process.env.SECURE_MODE === 'true' && !req.secure ? res.redirect('https://' + req.hostname + req.url) : next()
-// );
+app.use((req, res, next) =>
+  // check if it is a secure (https) request
+  // if not redirect to the equivalent https url
+  process.env.SECURE_MODE === 'true' && !req.secure ? res.redirect('https://' + req.hostname + req.url) : next()
+);
 
 app.post('/api/contact', (req, res) => {
   let transporter = nodemailer.createTransport(mailSettings.smtpConfig);
