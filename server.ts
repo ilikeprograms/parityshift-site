@@ -46,7 +46,7 @@ let sess = {
   }
 };
 
-if (app.get('env') === 'production') {
+if (process.env.SECURE_MODE === 'true') {
   sess.cookie.secure = true; // serve secure cookies
   sess.cookie.domain = 'parityshift.com';
 }
@@ -102,7 +102,7 @@ app.get('/health-check', (req, res) => res.sendStatus(200));
 // app.use((req, res, next) =>
 //   // check if it is a secure (https) request
 //   // if not redirect to the equivalent https url
-//   app.get('env') === 'production' && !req.secure ? res.redirect('https://' + req.hostname + req.url) : next()
+//   process.env.SECURE_MODE === 'true' && !req.secure ? res.redirect('https://' + req.hostname + req.url) : next()
 // );
 
 app.post('/api/contact', (req, res) => {
@@ -142,7 +142,7 @@ app.listen(PORT, () => {
   console.log(`Node Express server listening on http://localhost:${PORT}`);
 });
 
-if (app.get('env') === 'production') {
+if (process.env.SECURE_MODE === 'true') {
   const options = {
     cert: fs.readFileSync(`./ssl/${process.env.SSLCERTNAME}`),
     key: fs.readFileSync(`./ssl/${process.env.SSLCERTKEY}`)
