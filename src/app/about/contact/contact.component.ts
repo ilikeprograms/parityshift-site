@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
-import 'rxjs/add/operator/finally';
-import 'rxjs/add/operator/take';
 import { ReCaptchaComponent } from 'angular2-recaptcha';
+import { finalize, take } from 'rxjs/operators';
 
 @Component({
   templateUrl: './contact.component.html',
@@ -39,15 +38,17 @@ export class ContactComponent {
     const contactDetails = this.contactForm.value;
 
     this.httpClient.post('/api/contact', contactDetails)
-      .take(1)
-      .finally(() => {
-        this.isSubmitting = false;
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.isSubmitting = false;
 
-        this.contactForm.reset();
-        this.recaptchRef.reset();
+          this.contactForm.reset();
+          this.recaptchRef.reset();
 
-        this.cd.detectChanges();
-      })
+          this.cd.detectChanges();
+        })
+      )
       .subscribe(() => {
         this.isSubmitted = true;
       }, () => {
