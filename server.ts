@@ -144,8 +144,8 @@ app.listen(PORT, () => {
 
 if (process.env.SECURE_MODE === 'true') {
   const options = {
-    cert: fs.readFileSync(`./ssl/${process.env.SSLCERTNAME}`),
-    key: fs.readFileSync(`./ssl/${process.env.SSLCERTKEY}`)
+    cert: fs.readFileSync(`${process.env.SSLCERTPATH}/${process.env.SSLCERTNAME}`),
+    key: fs.readFileSync(`${process.env.SSLCERTPATH}/${process.env.SSLCERTKEY}`)
   };
 
   spdy.createServer(options, app).listen(SECUREPORT);
